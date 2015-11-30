@@ -21,14 +21,14 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
           <div id="CategoriasTableContainer">
-            <table class="table" data-paging="true" data-filtering="true" data-filter-placeholder="Buscar">
+            <table class="table" data-sorting="true" data-paging="true" data-filtering="true" data-filter-placeholder="Buscar">
                 <thead>
                         <tr>
-                                <th data-breakpoints="xs">ID</th>
+                                <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th data-breakpoints="xs">Fecha de Creación</th>
-                                <th >Acciones</th>
+                                <th  data-breakpoints="xs" style="width: 50%;">Descripcion</th>
+                                <th>Fecha de Creación</th>
+                                <th  data-breakpoints="xs">Acciones</th>
                         </tr>
                 </thead>
                 <tbody>		
@@ -80,6 +80,7 @@
         var getCategorias,getSubmit,getEdit,getModal,validateForm,modo;
         var objCategorias,objCategoria,setCategoria,updateCategoria,getDelete;
          $(function(){
+            fnActiva();
             getCategorias = function(){
                 $.ajax({
                     url:'ListaCategorias',

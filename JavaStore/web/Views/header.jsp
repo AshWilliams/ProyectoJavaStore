@@ -16,7 +16,7 @@
   <script src="Views/assets/js/footable.js"></script>
   <script src="Views/assets/js/lodash.min.js"></script>
   <script type="text/javascript">
-      var fnMensaje;
+      var fnMensaje,fnActiva;
       $(function(){
           fnMensaje = function(mensaje){
                 bootbox.dialog({
@@ -30,6 +30,13 @@
                          }                        
                 });                
           };  
+          fnActiva = function(){
+                $('.navbar-nav > li').removeClass('active');
+                var url = window.location;
+                $('ul.nav a').filter(function() {
+                    return this.href == url;
+                }).parent().addClass('active');
+          };
       });
   </script>
   

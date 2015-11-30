@@ -32,6 +32,15 @@
         <servlet-name>LogOut</servlet-name>
         <url-pattern>/LogOut</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Products</servlet-name>
+        <servlet-class>Controllers.Products</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Products</servlet-name>
+        <url-pattern>/Products</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Categorias</title>
+        <title>Productos</title>
         <%@include file="header.jsp" %>
     </head>
     <body>
@@ -20,15 +20,17 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-          <div id="CategoriasTableContainer">
-            <table class="table" data-sorting="true" data-paging="true" data-filtering="true" data-filter-placeholder="Buscar">
+          <div id="ProductosTableContainer">
+            <table class="table" data-paging="true" data-sorting="true" data-filtering="true" data-filter-placeholder="Buscar">
                 <thead>
                         <tr>
                                 <th>ID</th>
+                                <th>Categoria</th>
                                 <th>Nombre</th>
-                                <th  data-breakpoints="xs" style="width: 50%;">Descripcion</th>
-                                <th>Fecha de Creación</th>
-                                <th  data-breakpoints="xs">Acciones</th>
+                                <th data-breakpoints="xs" style="width: 50%;">Especificaciones</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th data-breakpoints="xs">Acciones</th>
                         </tr>
                 </thead>
                 <tbody>		
@@ -38,8 +40,22 @@
           
           
           <div id="formContainer">
-            <form id="myForm" method="post" class="form-horizontal" style="display: none;">
-                <div class="col-md-12">
+      <form id="myForm" method="post" class="form-horizontal" style="display: none;">
+          <div class="col-md-12">
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-4">
+                      <p>Categoría</p>
+                  </div>
+                  <div class="col-md-8">
+                      <select id="selCategoria" name="selCategoria" class="form-control" >
+                          
+                      </select>                                   
+                  </div>
+              </div>
+            </div>
+        </div>
+          <div class="col-md-12">
             <div class="form-group">
                <div class="row">
                   <div class="col-md-4">
@@ -51,19 +67,45 @@
               </div>
             </div>
          </div>
-                <div class="col-md-12">
+         <div class="col-md-12">
             <div class="form-group">
                <div class="row">
                   <div class="col-md-4">
-                      <p>Descripción</p>
+                      <p>Especificaciones</p>
                   </div>
                   <div class="col-md-8">
-                      <textarea id="Descripcion" name="Descripcion" class="form-control form-control-search"></textarea>                                   
+                      <textarea id="Specs" name="Specs" class="form-control form-control-search"></textarea>                                   
                   </div>
               </div>
             </div>
-        </div>                
-                <div class="form-group">
+        </div>
+          <div class="col-md-12">
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-4">
+                      <p>Precio</p>
+                  </div>
+                  <div class="col-md-8">
+                      <input id="Precio" name="Precio" value=""  class="form-control form-control-search" type="text" />
+                  </div>
+              </div>
+            </div>
+         </div>
+          
+         <div class="col-md-12">
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-4">
+                      <p>Stock</p>
+                  </div>
+                  <div class="col-md-8">
+                      <input id="Stock" name="Stock" value=""  class="form-control form-control-search" type="text" />
+                  </div>
+              </div>
+            </div>
+         </div>
+          
+         <div class="form-group">
             <div class="col-md-12 text-right">
                 <input type="submit" id="btnForm" value="" class="btn btn-success"/>
             </div>
@@ -77,32 +119,50 @@
     </div> <!-- /container -->
     
     <script type="text/javascript">
-        var getCategorias,getSubmit,getEdit,getModal,validateForm,modo;
-        var objCategorias,objCategoria,setCategoria,updateCategoria,getDelete;
-         $(function(){
+        var getProductos,getSubmit,getEdit,getModal,validateForm,modo;
+        var objProducto,objProductos,setProducto,updateProducto,getDelete;
+         $(function(){             
             fnActiva();
             getCategorias = function(){
                 $.ajax({
                     url:'ListaCategorias',
                     type:'GET'
                 }).done(function(datos){
+                    var html = '<option value="">Seleccione...</option>';
+                    if(datos.length > 0){
+                        $.each(datos,function(i,item){
+                            html +='<option value="'+item.IdCategoria+'">'+item.Nombre+'</option>';                                     
+                        });
+                    }                    
+                    $('#selCategoria').html(html);
+                    
+                });
+            };
+            getProductos = function(){
+                $.ajax({
+                    url:'Products',
+                    type:'POST',
+                    data:{Metodo:'listall'}
+                }).done(function(datos){
                     var html = '';
-                    objCategorias = datos;
+                    objProductos = datos;
                     if(datos.length > 0){
                         $.each(datos,function(i,item){
                             html += '<tr>'
-                                   +'<td>'+item.IdCategoria+'</td>'
+                                   +'<td>'+item.IdProducto+'</td>'
+                                   +'<td>'+item.Categoria+'</td>'
                                    +'<td>'+item.Nombre+'</td>'
-                                   +'<td>'+item.Descripcion+'</td>'
-                                   +'<td>'+item.Fecha+'</td>'
+                                   +'<td>'+item.Especificaciones+'</td>'
+                                   +'<td>'+item.Precio+'</td>'
+                                   +'<td>'+item.Stock+'</td>'
                                    +'<td>'
-                                   +'<span class="btn-group"><a class="xcrud-action btn btn-info btn-sm" title="Ver" href="javascript:;" data-primary="1" data-task="view"><i class="glyphicon glyphicon-search"></i></a><a data-categoria="'+item.IdCategoria+'" class="xcrud-action btn btn-warning btn-sm btnEditar" title="Editar" href="javascript:;" data-primary="1" data-task="edit"><i class="glyphicon glyphicon-edit "></i></a><a data-categoria="'+item.IdCategoria+'" class="xcrud-action btn btn-danger btn-sm btnEliminar" title="Eliminar" href="javascript:;" data-primary="1" data-task="remove" data-confirm="Do you really want remove this entry?"><i class="glyphicon glyphicon-remove"></i></a></span>'
+                                   +'<span class="btn-group"><a class="xcrud-action btn btn-info btn-sm" title="Ver" href="javascript:;" data-primary="1" data-task="view"><i class="glyphicon glyphicon-search"></i></a><a data-producto="'+item.IdProducto+'" class="xcrud-action btn btn-warning btn-sm btnEditar" title="Editar" href="javascript:;" data-primary="1" data-task="edit"><i class="glyphicon glyphicon-edit "></i></a><a data-producto="'+item.IdProducto+'" class="xcrud-action btn btn-danger btn-sm btnEliminar" title="Eliminar" href="javascript:;" data-primary="1" data-task="remove" data-confirm="Do you really want remove this entry?"><i class="glyphicon glyphicon-remove"></i></a></span>'
                                    +'</td>'
                                    +'</tr>';
                         });
                     }
                     else{
-                        html += '<tr><td></td><td></td><td></td><td></td><td></td></tr>';
+                        html += '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
                     }
                     
                     $('.table >tbody').html(html);
@@ -112,22 +172,26 @@
                         },
                         "filtering": {
                             "placeholder": "Buscar"
-                        }
+                        },
+                        "columns": [{
+                            "sortable": true
+                        }]
                     });
                     $('.form-inline').prepend('<a href="javascript:;" data-task="create" class="btn btn-success btnIngresar"><i class="glyphicon glyphicon-plus-sign"></i> Ingresar</a>');
                     getSubmit();
                     getEdit();
                     getDelete();
+                    getCategorias();
                 });
             };
-            getCategorias();
+            getProductos();
             
             getEdit = function(){
                 $('.btnEditar').click(function(e){
                     e.preventDefault();
-                    var idCat = $(this).data('categoria');
-                    objCategoria = _.where(objCategorias, { IdCategoria: parseInt(idCat) })[0];
-                    getModal("M",objCategoria);
+                    var idProd = $(this).data('producto');
+                    objProducto = _.where(objProductos, { IdProducto: parseInt(idProd) })[0];
+                    getModal("M",objProducto);
                 });
             };
             
@@ -136,19 +200,19 @@
                     e.preventDefault();
                     var myForm = {};
                     myForm.Metodo = 'delete';
-                    myForm.IdCategoria = $(this).data('categoria');
+                    myForm.IdProducto = $(this).data('producto');
                     $.ajax({
-                        url:'Categorias',
+                        url:'Products',
                         type:'POST',
                         data:myForm
                      }).done(function(datos){
                         fnMensaje(datos.Mensaje);
-                        getCategorias();
+                        getProductos();
                      }); 
                 });
             };
             
-            setCategoria = function(){
+            setProducto = function(){
               var myForm = {};
               myForm.Metodo = 'insert';
               myForm.Nombre = $('#Nombre').val();
@@ -159,11 +223,11 @@
                  data:myForm
               }).done(function(datos){
                  fnMensaje(datos.Mensaje);
-                 getCategorias();
+                 getProductos();
               });               
             };
             
-            updateCategoria = function(IdCategoria){
+            updateProducto = function(IdCategoria){
               var myForm = {};
               myForm.Metodo = 'update';
               myForm.IdCategoria = IdCategoria;
@@ -175,7 +239,7 @@
                  data:myForm
               }).done(function(datos){
                  fnMensaje(datos.Mensaje);
-                 getCategorias();
+                 getProductos();
               });  
             } 
             
@@ -187,26 +251,48 @@
             };
             validateForm = function(){
                 $('#myForm').validate({
-                  rules: {
+                  rules: {                   
+                    selCategoria:{
+                        required: true
+                    },
                     Nombre: {
                         minlength: 5,
                         maxlength: 255,
                         required: true
                     },
-                    Descripcion: {
+                    Specs: {
                         minlength: 5,
                         maxlength: 255,
                         required: true
-                    }                    
+                    },
+                    Precio: {
+                        required: true,
+                        number: true
+                    },
+                    Stock: {
+                        required: true,
+                        number: true
+                    }
                 },
                 messages: {
+                    selCategoria: {
+                        required: "Campo vacío"                        
+                    },
                     Nombre: {
                         required: "Campo vacío",
                         minlength: jQuery.validator.format("Ingrese al menos {0} caracteres")
                     },
-                    Descripcion: {
+                    Specs: {
                         required: "Campo vacío",
                         minlength: jQuery.validator.format("Ingrese al menos {0} caracteres")
+                    },
+                    Precio: {
+                        required: "Campo vacío",
+                        number:"Sólo Números"
+                    },
+                    Stock: {
+                        required: "Campo vacío",
+                        number:"Sólo Números"
                     }
                 },
                 highlight: function (element) {
@@ -226,34 +312,38 @@
                     }
                 },
                 submitHandler: function (form) {
-                    modo==="I"?setCategoria():updateCategoria(objCategoria.IdCategoria);
+                    modo==="I"?setProducto():updateProducto(objCategoria.IdCategoria);
                     bootbox.hideAll();
                     return false;
                 }
-                });
+              });
             };
             getModal = function (Modo) {
                 modo = Modo;
-                var titulo = "Ingresar Categoria: ";
-                var boton = "Guardar Categoria:";
+                var titulo = "Ingresar Producto:";
+                var boton = "Guardar Producto:";
                 if (modo === "M") {
-                    titulo = "Modificar Categoria: ";
-                    boton = "Actualizar Categoria:";               
+                    titulo = "Modificar Producto:";
+                    boton = "Actualizar Producto:";               
                 }  
                 validateForm();
                 bootbox.dialog({
                     title: titulo,
                     message: $("#myForm")
                 }).init(function () {
+                    console.log(objProducto);
                     if(modo==="M"){
-                        $("#Nombre").val(objCategoria.Nombre);
-                        $("#Descripcion").val(objCategoria.Descripcion);
+                        $('#selCategoria').val(objProducto.IdCategoria);
+                        $("#Nombre").val(objProducto.Nombre);
+                        $("#Specs").val(objProducto.Especificaciones);
+                        $('#Precio').val(objProducto.Precio);
+                        $('#Stock').val(objProducto.Stock);
                     }
                     $("#btnForm").val(boton);
                     $("#myForm").show();
                   });
                 $('.bootbox').on('shown.bs.modal', function () {
-                    $('#Nombre').focus();
+                    $('#selCategoria').focus();
                 });
                 $('.bootbox').on('hide.bs.modal', function () {
                     $("#myForm").validate().resetForm();
@@ -267,3 +357,4 @@
     </script>
     </body>
 </html>
+

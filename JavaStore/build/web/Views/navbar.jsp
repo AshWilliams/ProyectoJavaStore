@@ -20,7 +20,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="Categorias">Categorias</a></li>
-              <li><a href="#">Productos</a></li>
+              <li><a href="Products">Productos</a></li>
               <li><a href="#">Usuarios</a></li>
               <li><a href="#">Perfiles</a></li>
               <li><a id="btnSalir" href="javascript:;">Salir</a></li>
