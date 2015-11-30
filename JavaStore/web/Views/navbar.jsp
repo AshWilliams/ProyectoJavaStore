@@ -19,12 +19,22 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Categorias</a></li>
+              <li class="active"><a href="Categorias">Categorias</a></li>
               <li><a href="#">Productos</a></li>
               <li><a href="#">Usuarios</a></li>
-              <li><a href="#">Tiendas</a></li>
+              <li><a href="#">Perfiles</a></li>
+              <li><a id="btnSalir" href="javascript:;">Salir</a></li>
+            </ul>  
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="javascript:;">Bienvenido: ${sessionScope.Usuario}</a></li>              
             </ul>
-            
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </nav>
+</nav>
+<script type="text/javascript">
+    $(function(){
+        $('#btnSalir').click(function(){
+            window.location='LogOut';            
+        });
+    });
+</script>

@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,11 +40,12 @@ public class Usuario {
         this.attrMail = attrMail;
     }
 
-    public int validaUsuario(String usuario,String password){
-       String sql = "select count(1) from Usuarios where Usuario=? and Pass=?";
+    public int validaUsuario(String usuario,String password,HttpServletRequest request){
+       String sql = "select count(1),concat(Nombres,' ',Apellidos) from Usuarios where Usuario=? and Pass=?";
        String sha1 = "";
        int conteo = 0;
        MessageDigest crypt;
+       HttpSession objSesion = request.getSession(true);
         try {
             crypt = MessageDigest.getInstance("SHA-1");
             crypt.reset();
@@ -62,7 +65,8 @@ public class Usuario {
             stmt.setString(2, sha1);
             try (ResultSet rs = stmt.executeQuery()){ 
                 if (rs.next()) {
-                    conteo = rs.getInt(1);                    
+                    conteo = rs.getInt(1); 
+                    objSesion.setAttribute("Usuario", rs.getString(2));
                 }
             }
         } catch (SQLException e) {

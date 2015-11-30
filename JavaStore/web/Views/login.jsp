@@ -24,7 +24,7 @@
       </form>
         
         <script type="text/javascript">
-        var submitAction,fnMensaje;
+        var submitAction;
         $(function(){
             $('#myForm').validate({
                 rules: {
@@ -71,18 +71,7 @@
                 }
             });
                 
-            fnMensaje = function(mensaje){
-                bootbox.dialog({
-                        message: mensaje,
-                        title: "Estado",
-                        buttons: {
-                          success: {
-                            label: "OK",
-                            className: "btn-success"
-                          }
-                         }                        
-                });                
-            };    
+              
             submitAction = function(){
                var datos = {};
                datos.inputUsuario = $('#inputUsuario').val();
@@ -94,13 +83,20 @@
                }).done(function(respuesta){
                    if(respuesta.Codigo === 200 && respuesta.Estado === 1){                       
                        fnMensaje(respuesta.Mensaje);
-                       setTimeout(function(){window.location="Categorias"}, 2000);
+                       setTimeout(function(){window.location="Categorias";}, 2000);
                    }
                    else{
                        fnMensaje(respuesta.Mensaje);                       
                    }
                });
-            };                
+            }; 
+            //Limpia Url
+            var url = window.location.href;
+            var to = url.split('/');
+            if(typeof to[4] !=="undefined" && to[4] !== ""){
+                to.splice(4, 1);
+                window.location.href = to.join('/');
+            }            
         });
         </script>
 

@@ -8,10 +8,8 @@ package Controllers;
 import Services.CategoriaServices;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  *
@@ -40,8 +37,7 @@ public class ListaCategorias extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String metodo = request.getMethod();
-        String Url = request.getRequestURI();
+        String metodo = request.getMethod();        
         HttpSession objSesion = request.getSession(true); 
         
         if(metodo.equals("GET") && (boolean)objSesion.getAttribute("ValidUser")){

@@ -5,15 +5,11 @@
  */
 package Model;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -95,6 +91,39 @@ public class Categoria {
             throw new RuntimeException("Error al buscar por registro ", e);
         }   
         return misCategorias;
+    }
+    
+    public void setCategoria(String Nombre,String Descripcion){
+        String qry = "insert into Categorias(Nombre,Descripcion) values(?,?)";
+        try (PreparedStatement stmt = cnx.prepareStatement(qry)){
+            stmt.setString(1, Nombre);
+            stmt.setString(2, Descripcion);
+            stmt.executeUpdate();        
+        } catch (SQLException ex) {
+            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateCategoria(String IdCategoria,String Nombre,String Descripcion){
+        String qry = "update Categorias set Nombre = ?,Descripcion = ? where IdCategoria = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(qry)){
+            stmt.setString(1, Nombre);
+            stmt.setString(2, Descripcion);
+            stmt.setString(3, IdCategoria);
+            stmt.executeUpdate();        
+        } catch (SQLException ex) {
+            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteCategoria(String IdCategoria){
+        String qry = "delete from Categorias where IdCategoria = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(qry)){
+            stmt.setString(1, IdCategoria);
+            stmt.executeUpdate();        
+        } catch (SQLException ex) {
+            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

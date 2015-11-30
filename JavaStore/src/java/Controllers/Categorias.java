@@ -5,17 +5,20 @@
  */
 package Controllers;
 
+import Services.CategoriaServices;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
-import javax.servlet.FilterChain;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import org.json.simple.JSONObject;
 
 /**
@@ -23,7 +26,8 @@ import org.json.simple.JSONObject;
  * @author Overlord
  */
 public class Categorias extends HttpServlet {
-
+    @Resource(mappedName = "jdbc/MySQLConn")
+    private DataSource ds;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,11 +40,73 @@ public class Categorias extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String metodo = request.getMethod();
-        String Url = request.getRequestURI();
         HttpSession objSesion = request.getSession(true); 
-        
-        if(metodo.equals("GET") && (boolean)objSesion.getAttribute("ValidUser")){
-            request.getRequestDispatcher("Views/Mantenedores.jsp").forward(request, response);
+        if(objSesion.getAttribute("ValidUser") != null){
+            if(metodo.equals("GET") && (boolean)objSesion.getAttribute("ValidUser")){
+                request.getRequestDispatcher("Views/Mantenedores.jsp").forward(request, response);
+            } 
+            
+            if(metodo.equals("POST") && (boolean)objSesion.getAttribute("ValidUser")){
+                JSONObject json = new JSONObject();
+                String method = request.getParameter("Metodo");
+                if(method.equals("insert")){
+                    try(Connection cnx = ds.getConnection()){
+                        String Nombre = request.getParameter("Nombre");
+                        String Descripcion = request.getParameter("Descripcion");
+                        CategoriaServices catService = new CategoriaServices(cnx);
+                        catService.setCategoria(Nombre, Descripcion);
+                        json.put("Mensaje","Se ha insertado Categoria Correctamente");
+                    }catch (SQLException e) {
+                        json.put("Mensaje",e.getMessage());
+                    }
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("utf-8");
+                        out.print(json.toString());
+                    }
+                }
+                if(method.equals("update")){
+                    try(Connection cnx = ds.getConnection()){   
+                        String IdCategoria = request.getParameter("IdCategoria");
+                        String Nombre = request.getParameter("Nombre");
+                        String Descripcion = request.getParameter("Descripcion");
+                        CategoriaServices catService = new CategoriaServices(cnx);
+                        catService.updateCategoria(IdCategoria,Nombre, Descripcion);
+                        json.put("Mensaje","Se ha Actualizado Categoria " + IdCategoria);
+                    }catch (SQLException e) {
+                        json.put("Mensaje",e.getMessage());
+                    }
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("utf-8");
+                        out.print(json.toString());
+                    }
+                }
+                
+                if(method.equals("delete")){
+                    try(Connection cnx = ds.getConnection()){   
+                        String IdCategoria = request.getParameter("IdCategoria");                        
+                        CategoriaServices catService = new CategoriaServices(cnx);
+                        catService.deleteCategoria(IdCategoria);
+                        json.put("Mensaje","Se ha Eliminado Categoria " + IdCategoria);
+                    }catch (SQLException e) {
+                        json.put("Mensaje",e.getMessage());
+                    }
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("utf-8");
+                        out.print(json.toString());
+                    }
+                }
+            } 
+                       
+            
+        }
+        else{
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
     
@@ -72,6 +138,12 @@ public class Categorias extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

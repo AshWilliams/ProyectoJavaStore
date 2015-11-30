@@ -5,29 +5,20 @@
  */
 package Controllers;
 
-import Services.UsuarioServices;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Cypher
  */
-public class Login extends HttpServlet {
+public class LogOut extends HttpServlet {
 
-    @Resource(mappedName = "jdbc/MySQLConn")
-    private DataSource ds;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,44 +30,14 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-            //create Json Object
-            String metodo = request.getMethod();
-            
-            if(metodo.equals("POST")){
-                JSONObject json = new JSONObject();
-                //JSONArray jsonAraay = new JSONArray(your_array_list);
-                String usuario = request.getParameter("inputUsuario");
-                String password = request.getParameter("inputPassword");
-                try(Connection cnx = ds.getConnection()){
-                    UsuarioServices userService = new UsuarioServices(cnx);
-                    int respuesta = userService.validaUsuario(usuario, password,request);
-                    HttpSession objSesion = request.getSession(true); 
-                    if(respuesta == 1){                        
-                        objSesion.setAttribute("ValidUser",  true);                        
-                        json.put("Codigo",200);
-                        json.put("Estado", respuesta);
-                        json.put("Mensaje","Usuario Logueado Correctamente....Redirigiendo");
-                    }
-                    else{
-                        json.put("Codigo",500);
-                        json.put("Estado", respuesta);
-                        json.put("Mensaje","Esta cuenta no existe. Indica una cuenta diferente ");
-                    }
-
-                    //json.put("Url", request.getRequestURI());
-                    // finally output the json string       
-                    out.print(json.toString()); 
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+            String metodo = request.getMethod();        
+            HttpSession objSesion = request.getSession(true);
+            if(objSesion.getAttribute("ValidUser") != null){
+                if(metodo.equals("GET") && (boolean)objSesion.getAttribute("ValidUser")){
+                    objSesion.invalidate();
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
-                
-                
             }
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

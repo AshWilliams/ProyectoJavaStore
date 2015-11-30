@@ -7,6 +7,7 @@ package Services;
 
 import Model.Usuario;
 import java.sql.Connection;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -19,9 +20,9 @@ public class UsuarioServices {
     }
     
     
-    public int validaUsuario(String usuario,String password){
+    public int validaUsuario(String usuario,String password,HttpServletRequest request){
           
-        return myUser.validaUsuario(usuario, password);
+        return myUser.validaUsuario(usuario, password, request);
     }
     
 }

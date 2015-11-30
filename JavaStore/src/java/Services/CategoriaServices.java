@@ -23,4 +23,16 @@ public class CategoriaServices {
     public JSONArray getCategorias(){          
         return myCategoria.getCategorias();        
     }
+    
+    public void setCategoria(String Nombre,String Descripcion){
+        myCategoria.setCategoria(Nombre, Descripcion);
+    }
+    
+    public void updateCategoria(String IdCategoria,String Nombre,String Descripcion){
+        myCategoria.updateCategoria(IdCategoria,Nombre, Descripcion);
+    }
+    
+    public void deleteCategoria(String IdCategoria){
+        myCategoria.deleteCategoria(IdCategoria);
+    }
 }
