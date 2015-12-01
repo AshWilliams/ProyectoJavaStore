@@ -27,4 +27,12 @@ public class ProductosService {
     public void deleteProducto(String IdProducto){
         myProducto.deleteProducto(IdProducto);
     }
+    
+    public void updateProducto(String IdProducto,String Nombre,String Especificacion,String Categoria,String Precio,String Stock){
+        myProducto.updateProducto(IdProducto, Nombre, Especificacion, Categoria, Precio, Stock);
+    }
+    
+    public void insertProducto(String Nombre,String Especificacion,String Categoria,String Precio,String Stock){
+        myProducto.insertProducto(Nombre, Especificacion, Categoria, Precio, Stock);
+    }
 }

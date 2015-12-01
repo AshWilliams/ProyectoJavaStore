@@ -70,10 +70,15 @@ public class Products extends HttpServlet {
                 if(method.equals("insert")){
                     try(Connection cnx = ds.getConnection()){
                         String Nombre = request.getParameter("Nombre");
-                        String Descripcion = request.getParameter("Descripcion");
-                        CategoriaServices catService = new CategoriaServices(cnx);
-                        catService.setCategoria(Nombre, Descripcion);
-                        json.put("Mensaje","Se ha insertado Categoria Correctamente");
+                        String Especificacion = request.getParameter("Especificacion");
+                        String Categoria = request.getParameter("Categoria");
+                        String Precio = request.getParameter("Precio");
+                        String Stock = request.getParameter("Stock");
+                        
+                        ProductosService prodService = new ProductosService(cnx);
+                        prodService.insertProducto(Nombre, Especificacion, Categoria, Precio, Stock);
+                        
+                        json.put("Mensaje","Se ha insertado Producto Correctamente");
                     }catch (SQLException e) {
                         json.put("Mensaje",e.getMessage());
                     }
@@ -86,12 +91,17 @@ public class Products extends HttpServlet {
                 }
                 if(method.equals("update")){
                     try(Connection cnx = ds.getConnection()){   
-                        String IdCategoria = request.getParameter("IdCategoria");
+                        String IdProducto = request.getParameter("IdProducto");
                         String Nombre = request.getParameter("Nombre");
-                        String Descripcion = request.getParameter("Descripcion");
-                        CategoriaServices catService = new CategoriaServices(cnx);
-                        catService.updateCategoria(IdCategoria,Nombre, Descripcion);
-                        json.put("Mensaje","Se ha Actualizado Categoria " + IdCategoria);
+                        String Especificacion = request.getParameter("Especificacion");
+                        String Categoria = request.getParameter("Categoria");
+                        String Precio = request.getParameter("Precio");
+                        String Stock = request.getParameter("Stock");
+                        
+                        ProductosService prodService = new ProductosService(cnx);
+                        prodService.updateProducto(IdProducto, Nombre, Especificacion, Categoria, Precio, Stock);
+                        
+                        json.put("Mensaje","Se ha Actualizado Producto " + IdProducto);
                     }catch (SQLException e) {
                         json.put("Mensaje",e.getMessage());
                     }

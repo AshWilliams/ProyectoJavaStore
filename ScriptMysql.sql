@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `Descripcion` varchar(200) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla javastore.categorias: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
@@ -44,13 +44,14 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `IdCategoria` int(11) NOT NULL DEFAULT '0',
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`IdProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla javastore.productos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla javastore.productos: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
 INSERT INTO `productos` (`IdProducto`, `Nombre`, `Especificaciones`, `Precio`, `Stock`, `IdCategoria`, `FechaCreacion`) VALUES
 	(1, 'Dell Inspiron 1450', 'Con dimensión inicial de 2,54 cm (1"), la Inspiron 14 es elegante y portátil. Y el diseño moderno la hace tan elegante como móvil.', 400000, 30, 1, '2015-11-30 15:50:40'),
-	(2, 'Asus 4085', 'La ultrabook QHD más fina del mundo con tan solo 13 pulgadas. Más delgada. Más rápida. Más atractiva', 800000, 20, 2, '2015-11-30 15:51:03');
+	(2, 'Asus 4085', 'La ultrabook QHD más fina del mundo con tan solo 13 pulgadas. Más delgada. Más rápida. Más atractiva.', 800000, 25, 2, '2015-11-30 15:51:03'),
+	(4, 'Asus Zenfone', 'Intel Atom Quadcore, 4 gigs RAM, 16 gigs ROM', 210000, 15, 4, '2015-12-01 16:21:08');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 
 

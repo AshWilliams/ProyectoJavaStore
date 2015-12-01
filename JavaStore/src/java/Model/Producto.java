@@ -68,4 +68,36 @@ public class Producto {
             Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void updateProducto(String IdProducto,String Nombre,String Especificacion,String Categoria,String Precio,String Stock){
+        String qry = "update Productos set Nombre = ?,Especificaciones = ?,Precio = ?,Stock = ?, IdCategoria = ? where IdProducto = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(qry)){
+            stmt.setString(1, Nombre);
+            stmt.setString(2, Especificacion);
+            stmt.setString(3,Precio);
+            stmt.setString(4, Stock);
+            stmt.setString(5, Categoria);
+            stmt.setString(6, IdProducto);
+            stmt.executeUpdate();        
+        } catch (SQLException ex) {
+            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    
+    public void insertProducto(String Nombre,String Especificacion,String Categoria,String Precio,String Stock){
+        String qry = "insert into Productos(Nombre,Especificaciones,Precio,Stock,IdCategoria) values(?,?,?,?,?)";
+        try (PreparedStatement stmt = cnx.prepareStatement(qry)){
+            stmt.setString(1, Nombre);
+            stmt.setString(2, Especificacion);
+            stmt.setString(3,Precio);
+            stmt.setString(4, Stock);
+            stmt.setString(5, Categoria);
+            stmt.executeUpdate();        
+        } catch (SQLException ex) {
+            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    
 }

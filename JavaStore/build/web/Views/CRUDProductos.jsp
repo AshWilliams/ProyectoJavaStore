@@ -181,7 +181,7 @@
                     getSubmit();
                     getEdit();
                     getDelete();
-                    getCategorias();
+                    getCategorias(); //Select de categorías
                 });
             };
             getProductos();
@@ -216,9 +216,12 @@
               var myForm = {};
               myForm.Metodo = 'insert';
               myForm.Nombre = $('#Nombre').val();
-              myForm.Descripcion = $("#Descripcion").val();
+              myForm.Especificacion = $("#Specs").val();
+              myForm.Categoria = $('#selCategoria').val();
+              myForm.Precio = $('#Precio').val();
+              myForm.Stock = $('#Stock').val();
               $.ajax({
-                 url:'Categorias',
+                 url:'Products',
                  type:'POST',
                  data:myForm
               }).done(function(datos){
@@ -227,14 +230,17 @@
               });               
             };
             
-            updateProducto = function(IdCategoria){
+            updateProducto = function(IdProducto){
               var myForm = {};
               myForm.Metodo = 'update';
-              myForm.IdCategoria = IdCategoria;
+              myForm.IdProducto = IdProducto;
               myForm.Nombre = $('#Nombre').val();
-              myForm.Descripcion = $("#Descripcion").val();
+              myForm.Especificacion = $("#Specs").val();
+              myForm.Categoria = $('#selCategoria').val();
+              myForm.Precio = $('#Precio').val();
+              myForm.Stock = $('#Stock').val();
               $.ajax({
-                 url:'Categorias',
+                 url:'Products',
                  type:'POST',
                  data:myForm
               }).done(function(datos){
@@ -312,7 +318,7 @@
                     }
                 },
                 submitHandler: function (form) {
-                    modo==="I"?setProducto():updateProducto(objCategoria.IdCategoria);
+                    modo==="I"?setProducto():updateProducto(objProducto.IdProducto);
                     bootbox.hideAll();
                     return false;
                 }
@@ -331,7 +337,6 @@
                     title: titulo,
                     message: $("#myForm")
                 }).init(function () {
-                    console.log(objProducto);
                     if(modo==="M"){
                         $('#selCategoria').val(objProducto.IdCategoria);
                         $("#Nombre").val(objProducto.Nombre);
