@@ -5,7 +5,6 @@
  */
 package Controllers;
 
-import Services.CategoriaServices;
 import Services.ProductosService;
 import java.io.IOException;
 import java.io.PrintWriter;

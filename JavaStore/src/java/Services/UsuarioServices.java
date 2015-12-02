@@ -8,6 +8,7 @@ package Services;
 import Model.Usuario;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -23,6 +24,22 @@ public class UsuarioServices {
     public int validaUsuario(String usuario,String password,HttpServletRequest request){
           
         return myUser.validaUsuario(usuario, password, request);
+    }
+    
+    public JSONArray getAll(){          
+        return myUser.getAll();        
+    }
+    
+    public void insertUsuario(String IdPerfil,String Usuario,String Password,String Nombres,String Apellidos,String Direccion,String Email,String Rut){
+        myUser.insertUsuario(IdPerfil, Usuario, Password, Nombres, Apellidos, Direccion, Email,Rut);
+    }
+    
+    public void updateUsuario(String IdUsuario,String IdPerfil,String Usuario,String Password,String Nombres,String Apellidos,String Direccion,String Email,String Rut){
+        myUser.updateUsuario(IdUsuario, IdPerfil, Usuario, Password, Nombres, Apellidos, Direccion, Email,Rut);
+    }
+    
+    public void deleteUser(String IdUsuario){          
+       myUser.deleteUsuario(IdUsuario);
     }
     
 }

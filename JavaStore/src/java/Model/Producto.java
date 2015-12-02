@@ -64,7 +64,7 @@ public class Producto {
             stmt.setString(1, IdProducto);
             stmt.executeUpdate();        
         } catch (SQLException ex) {
-            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -79,7 +79,7 @@ public class Producto {
             stmt.setString(6, IdProducto);
             stmt.executeUpdate();        
         } catch (SQLException ex) {
-            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
@@ -94,7 +94,7 @@ public class Producto {
             stmt.setString(5, Categoria);
             stmt.executeUpdate();        
         } catch (SQLException ex) {
-            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }

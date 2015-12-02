@@ -16,6 +16,14 @@
         <servlet-name>LogOut</servlet-name>
         <servlet-class>Controllers.LogOut</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Usuarios</servlet-name>
+        <servlet-class>Controllers.Usuarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Perfiles</servlet-name>
+        <servlet-class>Controllers.Perfiles</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -32,7 +40,6 @@
         <servlet-name>LogOut</servlet-name>
         <url-pattern>/LogOut</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>Products</servlet-name>
         <servlet-class>Controllers.Products</servlet-class>
@@ -40,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>Products</servlet-name>
         <url-pattern>/Products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Usuarios</servlet-name>
+        <url-pattern>/Usuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Perfiles</servlet-name>
+        <url-pattern>/Perfiles</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

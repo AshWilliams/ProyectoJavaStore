@@ -21,12 +21,12 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="Categorias">Categorias</a></li>
               <li><a href="Products">Productos</a></li>
-              <li><a href="#">Usuarios</a></li>
-              <li><a href="#">Perfiles</a></li>
+              <li><a href="Usuarios">Usuarios</a></li>
+              <li><a href="Perfiles">Perfiles</a></li>
               <li><a id="btnSalir" href="javascript:;">Salir</a></li>
             </ul>  
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="javascript:;">Bienvenido: ${sessionScope.Usuario}</a></li>              
+              <li><a href="javascript:;">Bienvenido: ${sessionScope.Usuario} | Perfil: ${sessionScope.Perfil}</a></li>              
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

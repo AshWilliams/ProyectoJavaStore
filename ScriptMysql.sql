@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `Descripcion` varchar(200) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla javastore.categorias: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
@@ -34,6 +34,22 @@ INSERT INTO `categorias` (`idCategoria`, `Nombre`, `Descripcion`, `FechaCreacion
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 
 
+-- Volcando estructura para tabla javastore.perfiles
+CREATE TABLE IF NOT EXISTS `perfiles` (
+  `idPerfil` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Alias` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FechaCreacion` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idPerfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla javastore.perfiles: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `perfiles` DISABLE KEYS */;
+INSERT INTO `perfiles` (`idPerfil`, `Nombre`, `Alias`, `FechaCreacion`) VALUES
+	(1, 'Administrador', 'Administrador de Plataforma', '2015-12-02 12:05:24');
+/*!40000 ALTER TABLE `perfiles` ENABLE KEYS */;
+
+
 -- Volcando estructura para tabla javastore.productos
 CREATE TABLE IF NOT EXISTS `productos` (
   `IdProducto` int(11) NOT NULL AUTO_INCREMENT,
@@ -43,10 +59,11 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `Stock` int(11) NOT NULL DEFAULT '0',
   `IdCategoria` int(11) NOT NULL DEFAULT '0',
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`IdProducto`)
+  PRIMARY KEY (`IdProducto`),
+  KEY `IdCategoria` (`IdCategoria`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla javastore.productos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla javastore.productos: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
 INSERT INTO `productos` (`IdProducto`, `Nombre`, `Especificaciones`, `Precio`, `Stock`, `IdCategoria`, `FechaCreacion`) VALUES
 	(1, 'Dell Inspiron 1450', 'Con dimensión inicial de 2,54 cm (1"), la Inspiron 14 es elegante y portátil. Y el diseño moderno la hace tan elegante como móvil.', 400000, 30, 1, '2015-11-30 15:50:40'),
@@ -67,13 +84,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `Email` varchar(200) COLLATE utf8_unicode_ci DEFAULT '0',
   `Direccion` varchar(200) COLLATE utf8_unicode_ci DEFAULT '0',
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`idUsuario`),
+  KEY `idPerfil` (`idPerfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla javastore.usuarios: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`idUsuario`, `idPerfil`, `Usuario`, `Pass`, `Nombres`, `Apellidos`, `Rut`, `Email`, `Direccion`, `FechaCreacion`) VALUES
-	(1, 1, 'admin', 'f865b53623b121fd34ee5426c792e5c33af8c227', 'Robert', 'Rozas Navarro', '14542091-1', 'robert.rozas.n@gmail.com', 'Sin Especificar', '2015-11-29 18:12:34');
+	(1, 1, 'admin', 'f865b53623b121fd34ee5426c792e5c33af8c227', 'Robert', 'Rozas Navarro', '14542091-1', 'robert.rozas.n@gmail.com', 'El Bosque 880, Concón', '2015-11-29 18:12:34'),
+	(2, 1, 'rrozas', '057cd966b0b46d3b73c7270fa54d48af9c49cf92', 'Ricardo', 'Rozas Navarro', '11111111-1', 'rroza@gmail.com', 'Colina 1', '2015-12-02 15:57:19');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
