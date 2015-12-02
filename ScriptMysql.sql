@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
   PRIMARY KEY (`idPerfil`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla javastore.perfiles: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla javastore.perfiles: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `perfiles` DISABLE KEYS */;
 INSERT INTO `perfiles` (`idPerfil`, `Nombre`, `Alias`, `FechaCreacion`) VALUES
 	(1, 'Administrador', 'Administrador de Plataforma', '2015-12-02 12:05:24');
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   KEY `idPerfil` (`idPerfil`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla javastore.usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla javastore.usuarios: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`idUsuario`, `idPerfil`, `Usuario`, `Pass`, `Nombres`, `Apellidos`, `Rut`, `Email`, `Direccion`, `FechaCreacion`) VALUES
 	(1, 1, 'admin', 'f865b53623b121fd34ee5426c792e5c33af8c227', 'Robert', 'Rozas Navarro', '14542091-1', 'robert.rozas.n@gmail.com', 'El Bosque 880, Concón', '2015-11-29 18:12:34'),

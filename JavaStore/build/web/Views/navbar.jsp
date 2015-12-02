@@ -23,6 +23,7 @@
               <li><a href="Products">Productos</a></li>
               <li><a href="Usuarios">Usuarios</a></li>
               <li><a href="Perfiles">Perfiles</a></li>
+              <li><a href="DashBoard">Mini DashBoard</a></li>
               <li><a id="btnSalir" href="javascript:;">Salir</a></li>
             </ul>  
             <ul class="nav navbar-nav navbar-right">

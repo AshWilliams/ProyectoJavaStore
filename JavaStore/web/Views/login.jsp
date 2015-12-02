@@ -83,7 +83,7 @@
                }).done(function(respuesta){
                    if(respuesta.Codigo === 200 && respuesta.Estado === 1){                       
                        fnMensaje(respuesta.Mensaje);
-                       setTimeout(function(){window.location="Categorias";}, 2000);
+                       setTimeout(function(){window.location="Categorias";}, 1000);
                    }
                    else{
                        fnMensaje(respuesta.Mensaje);                       

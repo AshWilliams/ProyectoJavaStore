@@ -15,6 +15,7 @@
   <script src="Views/assets/js/jquery.validate.min.js"></script>
   <script src="Views/assets/js/footable.js"></script>
   <script src="Views/assets/js/lodash.min.js"></script>
+ 
   <script type="text/javascript">
       var fnMensaje,fnActiva;
       $(function(){

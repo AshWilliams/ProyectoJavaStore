@@ -327,10 +327,10 @@
             getModal = function (Modo) {
                 modo = Modo;
                 var titulo = "Ingresar Producto:";
-                var boton = "Guardar Producto:";
+                var boton = "Guardar Producto";
                 if (modo === "M") {
                     titulo = "Modificar Producto:";
-                    boton = "Actualizar Producto:";               
+                    boton = "Actualizar Producto";               
                 }  
                 validateForm();
                 bootbox.dialog({

@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/src/java/Model/Producto.java</file>
-            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/web/Views/CRUDProductos.jsp</file>
-            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/src/java/Controllers/Products.java</file>
-            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/src/java/Services/ProductosService.java</file>
+            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/src/java/Controllers/DashBoard.java</file>
+            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/src/java/Model/Graficos.java</file>
+            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/src/java/Services/DashBoardService.java</file>
+            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/web/Views/DashBoard.jsp</file>
+            <file>file:/C:/Users/Cypher/Desktop/ProyectoJavaStore/JavaStore/src/java/Controllers/Perfiles.java</file>
         </group>
     </open-files>
 </project-private>
