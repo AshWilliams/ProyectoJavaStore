@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `Descripcion` varchar(200) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla javastore.categorias: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
   `Alias` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `FechaCreacion` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idPerfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla javastore.perfiles: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla javastore.perfiles: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `perfiles` DISABLE KEYS */;
 INSERT INTO `perfiles` (`idPerfil`, `Nombre`, `Alias`, `FechaCreacion`) VALUES
 	(1, 'Administrador', 'Administrador de Plataforma', '2015-12-02 12:05:24');
@@ -86,9 +86,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idUsuario`),
   KEY `idPerfil` (`idPerfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla javastore.usuarios: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla javastore.usuarios: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`idUsuario`, `idPerfil`, `Usuario`, `Pass`, `Nombres`, `Apellidos`, `Rut`, `Email`, `Direccion`, `FechaCreacion`) VALUES
 	(1, 1, 'admin', 'f865b53623b121fd34ee5426c792e5c33af8c227', 'Robert', 'Rozas Navarro', '14542091-1', 'robert.rozas.n@gmail.com', 'El Bosque 880, Concón', '2015-11-29 18:12:34'),
