@@ -1,0 +1,33 @@
+
+Pauta Proyecto DESARROLLO EN JAVA
+
+Utilizar patrón de arquitectura mvc
+utilizar jsp como vistas
+utilizar jstl y el para el despliegue de información
+utilizar servlet como controladores
+utilizar clases java para el modelo
+utilizar excepciones para todos los paquetes
+utilizar DAO para todos las consultas
+conexión a través de jdbc
+utilizar log para guardar errores
+mí­nimo de tablas 4
+
+
+mandar docu informe digital(pdf doc)
+intro indice conclusión
+modelo de datos entidad-relación
+modelo relacional
+base de datos mysql
+prototipo del proyecto (vistas)
+cantidad de vistas minimas
+debe tener login control de sessiones
+listado de información
+todos los mantenedores de las tablas
+CRUD OJO CON LAS RELACIONES DE LAS TABLAS
+MINIMO UN LISTADO DE INFORMACION PRODUCTIVO
+DENTRO DEL LISTADO QUE SEA DINAMICO
+	
+que se actualice todo automáticamente
+(en tiempo real)
+
+VIDEO DE APOYO SI ES NECESARIO, para algunas demostraciones e instalaciones.
